@@ -38,8 +38,9 @@
     const $$ = (selector, parent = document) => Array.from(parent.querySelectorAll(selector));
   </script>
   <section class="test">
-    <sample-component style="--my-color: blue" />
-  <sample-component style="--my-color: red" />
+    <sample-component style="--my-color: blue"></sample-component>
+    <h3>This is plain HTML</h3>
+    <sample-component style="--my-color: red"></sample-component>
   </section>
 </body>
 

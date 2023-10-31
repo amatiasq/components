@@ -44,15 +44,15 @@ that is a boolean indicating whether the button is active or not.</li>
   </script>
   <section class="test">
     <hamburger-button></hamburger-button>
-  <hamburger-button active></hamburger-button>
-
-  <script>
-    for (const el of $$('hamburger-button')) {
-      el.addEventListener("toggle", (event) => {
-        console.log(el, event.detail.active);
-      });
-    }
-  </script>
+    <hamburger-button active></hamburger-button>
+  
+    <script>
+      for (const el of $$('hamburger-button')) {
+        el.addEventListener("toggle", (event) => {
+          console.log(el, event.detail.active);
+        });
+      }
+    </script>
   </section>
 </body>
 
