@@ -7,10 +7,14 @@
   <script type="module" src="hamburger-button.js"></script>
   <style>
     body {
+      max-width: 60em;
+      margin: 1em auto;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .test {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100dvh;
       justify-content: space-around;
       gap: 1rem;
     }
@@ -18,8 +22,38 @@
 </head>
 
 <body>
-  <hamburger-button></hamburger-button>
+  <section class="docs">
+  <h1>Hamburger Button</h1>
+<p>A hamburger button is a button that is used to toggle a menu or navigation bar. It is a common pattern in web design.</p>
+<p>It changes from three horizontal lines to a cross when clicked, reverting when clicked back.</p>
+<h2>Attributes</h2>
+<ul>
+<li><strong><code>active</code></strong> - indicates whether the button is active or not.</li>
+</ul>
+<h2>Events</h2>
+<ul>
+<li><strong><code>toggle</code></strong> - fired when the button is toggled. The <code>detail</code> property of the event contains an <code>active</code> property
+that is a boolean indicating whether the button is active or not.</li>
+</ul>
+  </section>
+
+  <h2> Test </h2>
+  <script>
+    const $ = (selector, parent = document) => parent.querySelector(selector);
+    const $$ = (selector, parent = document) => Array.from(parent.querySelectorAll(selector));
+  </script>
+  <section class="test">
+    <hamburger-button></hamburger-button>
   <hamburger-button active></hamburger-button>
+
+  <script>
+    for (const el of $$('hamburger-button')) {
+      el.addEventListener("toggle", (event) => {
+        console.log(el, event.detail.active);
+      });
+    }
+  </script>
+  </section>
 </body>
 
 </html>

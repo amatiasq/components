@@ -71,6 +71,14 @@ export class HamburgerButton extends HTMLElement {
 
   toggle() {
     this.toggleAttribute("active");
+
+    const event = new CustomEvent('toggle', {
+      detail: {
+        active: this.hasAttribute("active")
+      }
+    });
+
+    this.dispatchEvent(event);
   }
 }
 

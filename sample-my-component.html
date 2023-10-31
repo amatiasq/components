@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>sample-my-component test</title>
+  <script type="module" src="sample-my-component.js"></script>
+  <style>
+    body {
+      max-width: 60em;
+      margin: 1em auto;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .test {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      gap: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="docs">
+  <h1><code>sample-my-component</code></h1>
+  </section>
+
+  <h2> Test </h2>
+  <script>
+    const $ = (selector, parent = document) => parent.querySelector(selector);
+    const $$ = (selector, parent = document) => Array.from(parent.querySelectorAll(selector));
+  </script>
+  <section class="test">
+    <my-component style="--my-color: blue" />
+  <my-component style="--my-color: red" />
+  </section>
+</body>
+
+</html>
