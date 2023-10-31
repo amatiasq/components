@@ -1,3 +1,20 @@
+<docs>
+  # Hamburger Button
+
+  A hamburger button is a button that is used to toggle a menu or navigation bar. It is a common pattern in web design.
+
+  It changes from three horizontal lines to a cross when clicked, reverting when clicked back.
+
+  ## Attributes
+
+  - **`active`** - indicates whether the button is active or not.
+
+  ## Events
+
+  - **`toggle`** - fired when the button is toggled. The `detail` property of the event contains an `active` property
+  that is a boolean indicating whether the button is active or not.
+</docs>
+
 <template>
   <div class="bar"></div>
   <div class="bar"></div>
@@ -23,6 +40,14 @@
 
     toggle() {
       this.toggleAttribute("active");
+
+      const event = new CustomEvent('toggle', {
+        detail: {
+          active: this.hasAttribute("active")
+        }
+      });
+
+      this.dispatchEvent(event);
     }
   }
 </script>
@@ -72,4 +97,12 @@
 <test>
   <hamburger-button></hamburger-button>
   <hamburger-button active></hamburger-button>
+
+  <script>
+    for (const el of $$('hamburger-button')) {
+      el.addEventListener("toggle", (event) => {
+        console.log(el, event.detail.active);
+      });
+    }
+  </script>
 </test>

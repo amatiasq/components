@@ -1,0 +1,27 @@
+<template>
+  <div>Hello world!</div>
+</template>
+
+<script>
+  export class MyComponent extends HTMLElement {
+    // this property declaration...
+    #shadowRoot;
+
+    // ... and the constructor calling super()
+    // are required for this to work
+    constructor() {
+      super();
+    }
+  }
+</script>
+
+<style>
+  div {
+    color: var(--my-color);
+  }
+</style>
+
+<test>
+  <my-component style="--my-color: blue" />
+  <my-component style="--my-color: red" />
+</test>

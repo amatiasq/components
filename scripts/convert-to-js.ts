@@ -43,63 +43,28 @@ async function convertAll(input: string, output: string) {
 
 async function convertOne(input: string, output: string, filename: string) {
   const basename = filename.replace(/\.html$/, '');
-  await stdout(`- ${basename}`);
+  const start = Date.now();
 
   try {
     const source = toAbsolute(filename, `${input}/`)!;
     const dest = toAbsolute(`${basename}.js`, `${output}/`)!;
 
     const src = await Bun.file(source).text();
-    const { component, test } = parseHtmlComponent(basename, src);
+    const { component, docs } = await parseHtmlComponent(basename, src);
 
     await Bun.write(dest, component);
 
     const size = Bun.file(dest).size;
-    await stdout(` (${size} bytes)\n`);
+    console.log(`- ${basename} (${size} bytes in ${Date.now() - start}ms)`);
 
-    await Bun.write(
-      `${output}/${basename}.html`,
-      writeTestHtml(basename, test)
-    );
+    await Bun.write(`${output}/${basename}.html`, docs);
   } catch (error) {
-    console.error(error.message);
+    console.error(`Error processing ${input}:`);
+    console.error(error);
   }
 }
 
 function toAbsolute(path: string, base = Bun.cwd) {
   if (!path) return null;
   return new URL(path, `file://${base}`).pathname;
-}
-
-function stdout(text: string) {
-  return Bun.write(Bun.stdout, text);
-}
-
-function writeTestHtml(basename: string, content: string) {
-  return `
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8" />
-  <title>${basename} test</title>
-  <script type="module" src="${basename}.js"></script>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100dvh;
-      justify-content: space-around;
-      gap: 1rem;
-    }
-  </style>
-</head>
-
-<body>
-  ${content}
-</body>
-
-</html>
-      `.trim();
 }

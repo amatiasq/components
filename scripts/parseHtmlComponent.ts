@@ -1,53 +1,63 @@
-import * as htmlparser2 from 'htmlparser2';
+import { composeDocsPage } from './composeDocsPage';
+import { splitComponentSource } from './splitComponentSource';
 
-export function parseHtmlComponent(customTag: string, src: string) {
-  const { children } = htmlparser2.parseDocument(src, {
-    withStartIndices: true,
-    withEndIndices: true,
-  });
+export async function parseHtmlComponent(customTag: string, src: string) {
+  const {
+    script = generateScript(customTag),
+    style,
+    template,
+    docs = `# \`${customTag}\``,
+    test = `<${customTag}></${customTag}>`,
+  } = splitComponentSource(src);
 
-  const script = getTag('script', { removeTag: true });
-  const style = getTag('style').replace(/\n/g, '\n  ');
-  const template = getTag('template', { removeTag: true });
-  const test = getTag('test', { removeTag: true });
+  return {
+    docs: await composeDocsPage(customTag, docs, test),
 
-  let html = '';
-  if (template) html += `\n  ${template}\n`;
-  if (style) html += `\n  ${style}\n`;
+    component: composeComponent(
+      customTag,
+      script,
+      buildTemplate(template, style)
+    ),
+  };
+}
 
-  const component = `
-export const template = \`${html}\`;
+function composeComponent(tag: string, script: string, template: string) {
+  return `
+export const template = \`${template}\`;
 
-${script.replace(/\n  /g, '\n').replace(
-  /super\(\);?/,
-  `super();
+${script.replace(
+  /(constructor\(\)\s*\{\s*super\(\));?/,
+  `$1;
 
     // Automatically inserted
     // if this fails ensure #shadowRoot is defined in the class
     this.#shadowRoot = this.attachShadow({ mode: 'open' });
-    ${html ? 'this.#shadowRoot.innerHTML = template;' : ''}
+    ${template ? 'this.#shadowRoot.innerHTML = template;' : ''}
     // end of automatic insertion
   `
 )}
 
-customElements.define('${customTag}', ${toClassName(customTag)});
-  `.trim();
+customElements.define('${tag}', ${toClassName(tag)});
+    `.trim();
+}
 
-  return {
-    component,
-    test: test ?? `<${customTag}></${customTag}>`,
-  };
+function buildTemplate(template = '', style = '') {
+  let html = '';
+  if (template) html += `\n  ${template}\n`;
+  if (style) html += `\n  ${style}\n`;
+  return html;
+}
 
-  function getTag(tag: string, { removeTag = false } = {}) {
-    const child = children.find((x: any) => x.name === tag);
-    if (!child) return '';
+function generateScript(tag: string) {
+  return `
+export class ${toClassName(tag)} extends HTMLElement {
+  #shadowRoot;
 
-    const content = src.slice(child.startIndex!, child.endIndex! + 1);
-
-    return removeTag
-      ? content.replace(/(^<\w+>)|(<\/\w+>$)/g, '').trim()
-      : content;
+  constructor() {
+    super();
   }
+}
+  `.trim();
 }
 
 function toClassName(value: string) {
