@@ -6,11 +6,8 @@ export class SampleEmptyComponent extends HTMLElement {
   constructor() {
     super();
 
-    // Automatically inserted
-    // if this fails ensure #shadowRoot is defined in the class
     this.#shadowRoot = this.attachShadow({ mode: 'open' });
     
-    // end of automatic insertion
   
   }
 }

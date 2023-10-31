@@ -8,7 +8,7 @@ export const template = `
   </style>
 `;
 
-export class MyComponent extends HTMLElement {
+export class SampleComponent extends HTMLElement {
   // this property declaration...
   #shadowRoot;
 
@@ -17,13 +17,10 @@ export class MyComponent extends HTMLElement {
   constructor() {
     super();
 
-    // Automatically inserted
-    // if this fails ensure #shadowRoot is defined in the class
     this.#shadowRoot = this.attachShadow({ mode: 'open' });
     this.#shadowRoot.innerHTML = template;
-    // end of automatic insertion
   
   }
 }
 
-customElements.define('sample-my-component', SampleMyComponent);
+customElements.define('sample-component', SampleComponent);

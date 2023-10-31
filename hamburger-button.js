@@ -52,11 +52,8 @@ export class HamburgerButton extends HTMLElement {
   constructor() {
     super();
 
-    // Automatically inserted
-    // if this fails ensure #shadowRoot is defined in the class
     this.#shadowRoot = this.attachShadow({ mode: 'open' });
     this.#shadowRoot.innerHTML = template;
-    // end of automatic insertion
   
     this.bars = this.shadowRoot.querySelectorAll(".bar");
     this.toggle = this.toggle.bind(this);
