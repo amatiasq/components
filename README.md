@@ -49,6 +49,7 @@ This is how a web component, in this example `src/sample-component.html`, is def
 
 <test>
   <sample-component style="--my-color: blue" />
+  <h3>This is plain HTML</h3>
   <sample-component style="--my-color: red" />
 </test>
 ```
@@ -87,6 +88,28 @@ The `script`, `template`, `style`, `docs` and `test` elements are optional and c
 
 If the `script` tag is present it should contain a class called as the file (converted from `snake-case` to `PascalCase`) in order for the component to work.
 It should declare a `#shadowRoot` property that will be used to save the shadow DOM and the call to `super()` is used to inject the shadow DOM instantiation.
+
+## Future
+
+The idea behind this is that someday, when `<template shadowrootmode="open">` is supported by browsers (or maybe today with a polyfill) a Server Side Rendering (SSR) or Static Site Generation (SSG) tool could import the `const template` export and serve pre-fill components insides
+
+```html
+<sample-component>
+  <!-- this could be inserted by Vite, Astro, Next.js... -->
+  <template shadowrootmode="open">
+    <div>Hello world!</div>
+
+    <style>
+      div {
+        color: var(--my-color);
+      }
+    </style>
+  </template>
+</sample-component>
+```
+
+That would make the component immediately visible, even for users with disabled Javascript.
+If the user has Javascript enabled the component will just be hydrated as soon as it's code is executed.
 
 ## How to run
 

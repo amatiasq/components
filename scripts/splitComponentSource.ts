@@ -11,7 +11,7 @@ export function splitComponentSource(src: string) {
     style: indent(getTag('style')),
     template: withoutTag(getTag('template')),
     docs: withoutTag(getTag('docs')),
-    test: withoutTag(getTag('test')),
+    test: indent(withoutTag(getTag('test'))),
   };
 
   function getTag(tag: string) {
