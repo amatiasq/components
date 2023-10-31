@@ -37,6 +37,16 @@ This is how a web component, in this example `src/sample-component.html`, is def
   }
 </style>
 
+<docs>
+  # Sample Component
+
+  Some markdown documentation
+
+  - Neat
+  - Clean
+  - Simple
+</docs>
+
 <test>
   <sample-component style="--my-color: blue" />
   <sample-component style="--my-color: red" />
