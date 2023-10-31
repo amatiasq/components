@@ -38,7 +38,13 @@ This is how a web component, in this example `src/my-component.html`, is defined
 </style>
 
 <docs>
-  # My Component Some markdown documentation - Neat - Clean - Simple
+  # My Component
+  
+  Some markdown documentation
+  
+  - Neat
+  - Clean
+  - Simple
 </docs>
 
 <test>
