@@ -2,8 +2,10 @@
 
 This is where I store my web components.
 
-- [`<hamburger-button>`](https://components.amatiasq.com/hamburger-button.html)
-  - `import 'https://components.amatiasq.com/hamburger-button.js'`
+- Hamburger button: three lines that become a cross when clicked
+  - Documentation and demo: https://components.amatiasq.com/hamburger-button.html
+  - Installation: `import 'https://components.amatiasq.com/hamburger-button.js'`
+  - Usage: `<hamburger-button />`
 
 ## How it works
 
