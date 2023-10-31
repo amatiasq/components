@@ -5,7 +5,7 @@ This is where I store my web components.
 - Hamburger button: three lines that become a cross when clicked
   - Documentation and demo: https://components.amatiasq.com/hamburger-button.html
   - Installation: `import 'https://components.amatiasq.com/hamburger-button.js'`
-  - Usage: `<hamburger-button />`
+  - Usage: `<hamburger-button></hamburger-button>`
 
 ## How it works
 
@@ -48,13 +48,13 @@ This is how a web component, in this example `src/sample-component.html`, is def
 </docs>
 
 <test>
-  <sample-component style="--my-color: blue" />
+  <sample-component style="--my-color: blue"></sample-component>
   <h3>This is plain HTML</h3>
-  <sample-component style="--my-color: red" />
+  <sample-component style="--my-color: red"></sample-component>
 </test>
 ```
 
-Which whill generate `out/sample-component.js` (below) and `out/sample-component.html` for documentation and manual testing.
+Which whill generate `out/sample-component.js` (below) and [`out/sample-component.html`](https://components.amatiasq.com/sample-component.html) for documentation and manual testing.
 
 ```js
 export const template = `
@@ -91,7 +91,7 @@ It should declare a `#shadowRoot` property that will be used to save the shadow 
 
 ## Future
 
-The idea behind this is that someday, when `<template shadowrootmode="open">` is supported by browsers (or maybe today with a polyfill) a Server Side Rendering (SSR) or Static Site Generation (SSG) tool could import the `const template` export and serve pre-fill components insides
+The idea behind this is that someday, when `<template shadowrootmode="open">` is supported by browsers (or maybe today with a polyfill) a Server Side Rendering (SSR) or Static Site Generation (SSG) tool could import the `const template` export and serve pre-filled components' insides.
 
 ```html
 <sample-component>
@@ -110,6 +110,8 @@ The idea behind this is that someday, when `<template shadowrootmode="open">` is
 
 That would make the component immediately visible, even for users with disabled Javascript.
 If the user has Javascript enabled the component will just be hydrated as soon as it's code is executed.
+
+To know more about this approach check [this video](https://www.youtube.com/watch?v=V2yjXFPYjVA) by Thomas Allmer.
 
 ## How to run
 
