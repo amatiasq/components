@@ -66,7 +66,7 @@ export const template = `
   </style>
 `;
 
-export class MyComponent extends HTMLElement {
+export class SampleComponent extends HTMLElement {
   #shadowRoot;
 
   constructor() {
@@ -80,7 +80,7 @@ export class MyComponent extends HTMLElement {
 }
 
 // Automatically generated from file name
-customElements.define('my-component', MyComponent);
+customElements.define('sample-component', SampleComponent);
 ```
 
 The `script`, `template`, `style`, `docs` and `test` elements are optional and can be defined in any order.
