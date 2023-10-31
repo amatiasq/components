@@ -39,9 +39,9 @@ This is how a web component, in this example `src/my-component.html`, is defined
 
 <docs>
   # My Component
-  
+
   Some markdown documentation
-  
+
   - Neat
   - Clean
   - Simple
@@ -53,7 +53,7 @@ This is how a web component, in this example `src/my-component.html`, is defined
 </test>
 ```
 
-Wich whill generate `out/my-component.js` (below) and `my-component.html` for documentation and manual testing.
+Which whill generate `out/my-component.js` (below) and `my-component.html` for documentation and manual testing.
 
 ```js
 export const template = `
