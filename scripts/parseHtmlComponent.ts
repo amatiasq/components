@@ -29,11 +29,8 @@ ${script.replace(
   /(constructor\(\)\s*\{\s*super\(\));?/,
   `$1;
 
-    // Automatically inserted
-    // if this fails ensure #shadowRoot is defined in the class
     this.#shadowRoot = this.attachShadow({ mode: 'open' });
     ${template ? 'this.#shadowRoot.innerHTML = template;' : ''}
-    // end of automatic insertion
   `
 )}
 

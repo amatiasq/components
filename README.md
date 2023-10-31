@@ -11,7 +11,7 @@ This is where I store my web components.
 
 In order to create them easily I created [a simple transpiler](./scripts/convert-to-js.ts) in Bun.
 
-This is how a web component, in this example `src/my-component.html`, is defined:
+This is how a web component, in this example `src/sample-component.html`, is defined:
 
 ```html
 <template>
@@ -19,7 +19,7 @@ This is how a web component, in this example `src/my-component.html`, is defined
 </template>
 
 <script>
-  export class MyComponent extends HTMLElement {
+  export class SampleComponent extends HTMLElement {
     // this property declaration...
     #shadowRoot;
 
@@ -37,30 +37,22 @@ This is how a web component, in this example `src/my-component.html`, is defined
   }
 </style>
 
-<docs>
-  # My Component
-
-  Some markdown documentation
-
-  - Neat
-  - Clean
-  - Simple
-</docs>
-
 <test>
-  <my-component style="--my-color: blue" />
-  <my-component style="--my-color: red" />
+  <sample-component style="--my-color: blue" />
+  <sample-component style="--my-color: red" />
 </test>
 ```
 
-Which whill generate `out/my-component.js` (below) and `my-component.html` for documentation and manual testing.
+Which whill generate `out/sample-component.js` (below) and `out/sample-component.html` for documentation and manual testing.
 
 ```js
 export const template = `
   <div>Hello world!</div>
 
   <style>
-    div { color: var(--my-color); }
+    div {
+      color: var(--my-color);
+    }
   </style>
 `;
 
@@ -74,10 +66,10 @@ export class MyComponent extends HTMLElement {
     // if this fails ensure #shadowRoot is defined in the class
     this.#shadowRoot = this.attachShadow({ mode: 'open' });
     this.#shadowRoot.innerHTML = template;
-    // end of automatic insertion
   }
 }
 
+// Automatically generated from file name
 customElements.define('my-component', MyComponent);
 ```
 
