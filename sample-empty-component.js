@@ -1,3 +1,5 @@
+export const tagName = 'sample-empty-component';
+
 export const template = ``;
 
 export class SampleEmptyComponent extends HTMLElement {

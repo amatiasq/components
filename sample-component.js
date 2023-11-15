@@ -1,3 +1,5 @@
+export const tagName = 'sample-component';
+
 export const template = `
   <div>Hello world!</div>
 

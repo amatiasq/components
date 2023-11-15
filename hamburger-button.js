@@ -1,3 +1,5 @@
+export const tagName = 'hamburger-button';
+
 export const template = `
   <div class="bar"></div>
   <div class="bar"></div>
