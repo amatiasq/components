@@ -23,6 +23,8 @@ export async function parseHtmlComponent(customTag: string, src: string) {
 
 function composeComponent(tag: string, script: string, template: string) {
   return `
+export const tagName = '${tag}';
+
 export const template = \`${template}\`;
 
 ${script.replace(
